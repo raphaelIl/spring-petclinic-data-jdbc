@@ -5,6 +5,7 @@
 plugins {
     id 'java-library'
     id 'maven-publish'
+    id 'com.google.cloud.tools.jib' version '3.3.1'
 }
 
 repositories {
@@ -61,4 +62,31 @@ tasks.withType(JavaCompile) {
 
 tasks.withType(Javadoc) {
     options.encoding = 'UTF-8'
+}
+
+jib {
+    from {
+        image = 'registry://public.ecr.aws/docker/library/eclipse-temurin:17.0.7_7-jdk-focal'
+        platforms {
+            platform {
+                architecture = 'amd64'
+                os = 'linux'
+            }
+            platform {
+                architecture = 'arm64'
+                os = 'linux'
+            }
+        }
+    }
+    to {
+        image = 'raphael1021/spring-petclinic-data-jdbc:jib'
+    }
+
+    container {
+        mainClass = 'org.springframework.samples.petclinic.PetClinicApplication'
+//        entrypoint = ["java", "-Duser.timezone=Asia/Seoul", "-jar", "/app/spring-petclinic-data-jdbc-3.0.0.BUILD-SNAPSHOT.jar"]
+        appRoot = '/app'
+    }
+
+//    useDockerClient = true
 }

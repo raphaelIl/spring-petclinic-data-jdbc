@@ -1,0 +1,50 @@
+server:
+  shutdown: graceful
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+      probes:
+        enabled: true
+  health:
+    db:
+      enabled: true
+    diskspace:
+      enabled: true
+    livenessstate:
+      enabled: true
+    readinessstate:
+      enabled: true
+
+logging:
+  config: classpath:logback-spring.xml
+  level:
+    org.springframework: info
+    sql: debug
+
+spring:
+  config:
+    activate:
+      on-profile: stg
+  datasource:
+    url: jdbc:mysql://mysql/petclinic
+    username: root
+    password: petclinic
+
+  test:
+    database:
+      replace: none
+
+  messages:
+    basename: messages/messages
+
+  web:
+    resources:
+      cache:
+        cachecontrol:
+          max-age: 12h
