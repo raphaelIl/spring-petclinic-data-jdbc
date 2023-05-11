@@ -11,44 +11,13 @@
     <encoder>
       <pattern>%d{yyyy-MM-dd HH:mm:ss} [%-5p] [%F]%M\(%L\) : %m%n</pattern>
     </encoder>
-    <!-- 일자별로 로그파일 적용하기 -->
+
     <file>${LOG_PATH_NAME}</file>
     <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
       <fileNamePattern>${LOG_PATH_NAME}.%d{yyyyMMdd}</fileNamePattern>
-      <maxHistory>60</maxHistory> <!-- 일자별 백업파일의 보관기간 -->
+      <maxHistory>30</maxHistory>
     </rollingPolicy>
   </appender>
-<!--  <appender class="ch.qos.logback.core.ConsoleAppender" name="JSON">-->
-<!--    <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">-->
-<!--      <providers>-->
-<!--        <arguments/>-->
-<!--        <callerData/>-->
-<!--        <logLevel/>-->
-<!--        <mdc/>-->
-<!--        <pattern>-->
-<!--          <omitEmptyFields>true</omitEmptyFields>-->
-<!--          <pattern>-->
-<!--            {-->
-<!--            "timestamp": "%d{yyyy-MM-dd HH:mm:ss.SSS}",-->
-<!--            "message": "%message",-->
-<!--            "exception": "%ex{full}",-->
-<!--            "dd.service": "oms-order-operation",-->
-<!--            "data.keyword": "oms-order-operation",-->
-<!--            "traceId": "%X{dd.trace_id}",-->
-<!--            "spanId": "%X{dd.span_id}"-->
-<!--            }-->
-<!--          </pattern>-->
-<!--        </pattern>-->
-<!--        <rootStackTraceElement/>-->
-<!--        <sequence/>-->
-<!--        <threadName/>-->
-<!--        <throwableClassName/>-->
-<!--        <throwableRootCauseClassName/>-->
-<!--        <timestamp/>-->
-<!--        <version/>-->
-<!--      </providers>-->
-<!--    </encoder>-->
-<!--  </appender>-->
 
   <!-- STDOUT Appender -->
   <include resource="org/springframework/boot/logging/logback/console-appender.xml"/>
@@ -56,28 +25,10 @@
   <!-- FILE Appender -->
   <property name="LOG_PATH_NAME" value="${LOG_DIR}/service-log.log"/>
 
-  <property name="LOG_DIR" value="/var/log/kurly"/>
+  <property name="LOG_DIR" value="/logs"/>
 
-  <!-- spring.profile에 따른 설정파일 분기 -->
-<!--  <springProfile name="dev,stg,2cc,perf">-->
-<!--    <logger level="DEBUG" name="org.springframework.data"/>-->
-<!--    <logger level="ERROR" name="com.kurly.cloud"/>-->
-<!--    <logger level="ERROR" name="io.netty"/>-->
-<!--    <logger level="DEBUG" name="com.kurly.omsOrderOperation"/>-->
-<!--    <root level="INFO">-->
-<!--      <appender-ref ref="FILE"/>-->
-<!--      <appender-ref ref="JSON"/>-->
-<!--    </root>-->
-<!--  </springProfile>-->
-
-<!--  <springProfile name="prod">-->
-<!--    <logger additivity="false" level="DEBUG" name="org.springframework.data"/>-->
-<!--    <logger level="ERROR" name="com.kurly.cloud"/>-->
-<!--    <logger level="ERROR" name="io.netty"/>-->
-<!--    <logger level="INFO" name="com.kurly.omsOrderOperation"/>-->
-<!--    <root level="INFO">-->
-<!--      <appender-ref ref="FILE"/>-->
-<!--      <appender-ref ref="JSON"/>-->
-<!--    </root>-->
-<!--  </springProfile>-->
+  <root level="info">
+    <appender-ref ref="STDOUT" />
+    <appender-ref ref="FILE" />
+  </root>
 </configuration>
