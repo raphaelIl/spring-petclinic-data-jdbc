@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
+  name: spring-petclinic-ingress
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: raphael-test.play.kurly.services
+      http:
+        paths:
+          - backend:
+              service:
+                name: spring-petclinic
+                port:
+                  number: 8080
+            path: /
+            pathType: Prefix
