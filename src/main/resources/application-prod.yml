@@ -11,28 +11,28 @@ management:
       show-details: always
       probes:
         enabled: true
-      group:
-        liveness:
-          include: livenessState
-        readiness:
-          include: readinessState,db,ping
-#  health:
-#    db:
-#      enabled: true
-#    livenessstate:
-#      enabled: true
-#    readinessstate:
-#      enabled: true
+  health:
+    db:
+      enabled: true
+    diskspace:
+      enabled: true
+    livenessstate:
+      enabled: true
+    readinessstate:
+      enabled: true
 
 logging:
   config: classpath:logback-spring.xml
   level:
     org.springframework: info
-    sql: debug
+    sql: info
 
 spring:
+  config:
+    activate:
+      on-profile: prod
   datasource:
-    url: jdbc:mysql://localhost:3306/petclinic
+    url: jdbc:mysql://mysql.default:3306/petclinic
     username: root
     password: petclinic
   test:

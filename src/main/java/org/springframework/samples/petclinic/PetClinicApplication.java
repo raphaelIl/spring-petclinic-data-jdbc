@@ -15,7 +15,6 @@
  */
 package org.springframework.samples.petclinic;
 
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -25,7 +24,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @author Dave Syer
  *
  */
-@Slf4j
 @SpringBootApplication
 public class PetClinicApplication {
 

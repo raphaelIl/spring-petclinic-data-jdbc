@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class PingController {
 
-    @GetMapping("/ping")
+    @GetMapping("/healthy")
     public String ping(HttpServletRequest request) {
         String clientIp = request.getRemoteAddr();
 
