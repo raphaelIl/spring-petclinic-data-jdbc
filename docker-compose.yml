@@ -1,12 +1,29 @@
 version: "2.2"
 
 services:
+  app:
+    container_name: app
+    depends_on:
+      - mysql
+      - test
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+    image: raphael1021/spring-petclinic-data-jdbc:jib
+    ports:
+      - "8080:8080"
+    user: "1000:1000"
   mysql:
+    container_name: mysql
+    environment:
+      - MYSQL_DATABASE=petclinic
+      - MYSQL_ROOT_PASSWORD=petclinic
+    hostname: mysql
     image: mysql:8.0
     ports:
       - "3306:3306"
-    environment:
-      - MYSQL_ROOT_PASSWORD=petclinic
-      - MYSQL_DATABASE=petclinic
     volumes:
       - "./conf.d:/etc/mysql/conf.d:ro"
+  test:
+    command: sleep "infinity"
+    container_name: test
+    image: registry.k8s.io/e2e-test-images/jessie-dnsutils:1.3
