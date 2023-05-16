@@ -11,6 +11,7 @@ services:
     image: raphael1021/spring-petclinic-data-jdbc:jib
     ports:
       - "8080:8080"
+    restart: always
     user: "1000:1000"
   mysql:
     container_name: mysql
