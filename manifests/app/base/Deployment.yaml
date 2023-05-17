@@ -16,11 +16,10 @@ spec:
       containers:
         - name: spring-petclinic
           env:
-            - name: JAVA_TOOL_OPTIONS
-              value: ""
             - name: SPRING_PROFILES_ACTIVE
               value: prod
           image: raphael1021/spring-petclinic-data-jdbc:jib
+          imagePullPolicy: Always
           lifecycle:
             preStop:
               exec:

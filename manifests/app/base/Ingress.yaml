@@ -1,13 +1,13 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /$1
+#  annotations:
+#    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
   name: spring-petclinic-ingress
 spec:
   ingressClassName: nginx
   rules:
-    - host: raphael-test.play.kurly.services
+    - host: raphael-test.stg.kurly.services
       http:
         paths:
           - backend:

@@ -5,24 +5,9 @@ metadata:
   labels:
     app: mysql
 spec:
-  volumeName: mysql-pv
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
       storage: 10Gi
-  storageClassName: default-2a
-
----
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: mysql-pv
-spec:
-  capacity:
-    storage: 10Gi
-  volumeMode: Filesystem
-  accessModes:
-    - ReadWriteOnce
-  persistentVolumeReclaimPolicy: Retain
-  storageClassName: default-2a
+  storageClassName: default-2a # pv는 dynamic provisioning

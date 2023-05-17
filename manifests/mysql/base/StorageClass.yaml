@@ -1,0 +1,22 @@
+# ebs.csi.aws.com 가 설치되었다는 가정
+allowedTopologies:
+  - matchLabelExpressions:
+      - key: topology.ebs.csi.aws.com/zone
+        values:
+          - ap-northeast-2a
+allowVolumeExpansion: true
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: default-2a
+parameters:
+  allowAutoIOPSPerGBIncrease: "true"
+  csi.storage.k8s.io/fstype: ext4
+  tagSpecification_1: PvcNamespace={{ .PVCNamespace }}
+  tagSpecification_2: PvcName={{ .PVCName }}
+  tagSpecification_3: PvName={{ .PVName }}
+  tagSpecification_4: Name=stg-mgmt
+  type: gp3
+provisioner: ebs.csi.aws.com
+reclaimPolicy: Retain
+volumeBindingMode: Immediate
