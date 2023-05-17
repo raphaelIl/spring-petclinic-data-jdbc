@@ -16,13 +16,6 @@ management:
           include: livenessState
         readiness:
           include: readinessState,db,ping
-#  health:
-#    db:
-#      enabled: true
-#    livenessstate:
-#      enabled: true
-#    readinessstate:
-#      enabled: true
 
 logging:
   config: classpath:logback-spring.xml

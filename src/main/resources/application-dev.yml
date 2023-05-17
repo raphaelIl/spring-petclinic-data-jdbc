@@ -35,7 +35,6 @@ spring:
     activate:
       on-profile: dev
   datasource:
-#    url: jdbc:mysql://spring-petclinic-data-jdbc-mysql-1:3306/petclinic
     url: jdbc:mysql://mysql:3306/petclinic
     username: root
     password: petclinic
